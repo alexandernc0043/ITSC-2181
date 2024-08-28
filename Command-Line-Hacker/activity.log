@@ -1,0 +1,2894 @@
+===================================
+Sun Aug 25 12:33:01 EDT 2024
+===================================
+Sun Aug 25 12:38:26 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:38:39 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat [K[K[K[Kls [K[Ks -a
+[?2004l-  [0m[01;34m.[0m  [01;34m..[0m  .bash_logout  .bashrc  .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls -al
+[?2004ltotal 24
+-rw-r-----  1 bandit2 bandit1   33 Jul 17 15:57 -
+drwxr-xr-x  2 root    root    4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 70 root    root    4096 Jul 17 15:58 [01;34m..[0m
+-rw-r--r--  1 root    root     220 Mar 31 08:41 .bash_logout
+-rw-r--r--  1 root    root    3771 Mar 31 08:41 .bashrc
+-rw-r--r--  1 root    root     807 Mar 31 08:41 .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat -
+[?2004l
+
+
+
+^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat -.-/-
+[?2004l263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat "-'[K"
+[?2004l^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:40:26 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ ls
+[?2004lspaces in this filename
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ cat "spaces in this filename" 
+[?2004lMNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:41:45 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls -l
+[?2004ltotal 4
+drwxr-xr-x 2 root root 4096 Jul 17 15:57 [0m[01;34minhere[0m
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ cd hi[K[K[Kin[K[K inhere/
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls -l
+[?2004ltotal 0
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls -la
+[?2004ltotal 12
+drwxr-xr-x 2 root    root    4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 3 root    root    4096 Jul 17 15:57 [01;34m..[0m
+-rw-r----- 1 bandit4 bandit3   33 Jul 17 15:57 ...Hiding-From-You
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ cat ...Hiding-From-You 
+[?2004l2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:43:45 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ cd inhere/
+[?2004l[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ ls -l
+[?2004ltotal 40
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file00
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file01
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file02
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file03
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file04
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file05
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file06
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file07
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file08
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file09
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat .[K./-file00
+[?2004lÅ¢,µªÅ†ÖπYq»Ìf†LÚˆÕjÃ0µÛñÃıxã4F[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file00[C[K1
+[?2004lâ¶:≥>†3kÍvè5K´˚ípÕìŒ	XN‘.ãìù[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file01[K3[K2
+[?2004l£ê9Ü¯íô√Ó§F«˜p‰ÙÆˇ∏Ê„tkºÇó%˙¿[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file02[K3
+[?2004lê≠üÜ˝nÜQy‘‰åyÕç¶{+R€bZ¶k™FÅ*	[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file03[K4
+[?2004l
+l∫ÏˇÅê]…aﬂØ-@gQø√∑ºwzêP·∫ﬂ†yß[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file04[K5
+[?2004l p”ªT9÷FÛô∑Âû3À§ùﬁÔõ”)
+T˘’úF‡«≠â[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file05[K6
+[?2004lQ ƒπâMª∞◊p4ó-Ô8™‡=¯é!#gèóÓ£[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file06[K7
+[?2004l4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file07[K8
+[?2004l ßh?+>©¥ÒÉR0\üÖqÉc˙µ(|è^âÓ±[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file08[K9
+[?2004lJÁÅ$}PÏcL‡û¸sóÌ@∑2%Y£—ã≠œ¢µ√[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file0
+[?2004l./-file0: cannot open `./-file0' (No such file or directory)
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file00 
+[?2004l./-file00: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file00 [K[K1
+[?2004l./-file01: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file01[K[K02
+[?2004l./-file02: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file02[K3
+[?2004l./-file03: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file034[K[K4
+[?2004l./-file04: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file04[K5
+[?2004l./-file05: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file05[K*
+[?2004l./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat /[K~/[K[K./fi[K[Kf[K-file07 
+[?2004l4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:47:04 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:08:20 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ ls
+[?2004lreadme
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ ls [K[K[Kcat read[K[K[K[K[K-b [K[K[K[K [Kt -b readme [K
+[?2004l     1	Congratulations on your first steps into the bandit game!!
+     2	Please make sure you have read the rules at https://overthewire.org/rules/
+     3	If you are following a course, workshop, walthrough or other educational activity,
+     4	please inform the instructor about the rules as well and encourage them to
+     5	contribute to the OverTheWire community so we can keep these games free!
+
+     6	The password you are looking for is: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:10:33 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cd -
+[?2004l-bash: cd: OLDPWD not set
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls -a
+[?2004l-  [0m[01;34m.[0m  [01;34m..[0m  .bash_logout  .bashrc  .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cd ..
+[?2004l[?2004h]0;bandit1@bandit: /home[01;32mbandit1@bandit[00m:[01;34m/home[00m$ ls
+[?2004l[0m[01;34mbandit0[0m   [01;34mbandit2[0m       [01;34mbandit29[0m      [01;34mbandit7[0m    [01;34mdrifter4[0m     [01;34mkrypton1[0m
+[01;34mbandit1[0m   [01;34mbandit20[0m      [01;34mbandit29-git[0m  [01;34mbandit8[0m    [01;34mdrifter5[0m     [01;34mkrypton2[0m
+[01;34mbandit10[0m  [01;34mbandit21[0m      [01;34mbandit3[0m       [01;34mbandit9[0m    [01;34mdrifter6[0m     [01;34mkrypton3[0m
+[01;34mbandit11[0m  [01;34mbandit22[0m      [01;34mbandit30[0m      [01;34mdrifter0[0m   [01;34mdrifter7[0m     [01;34mkrypton4[0m
+[01;34mbandit12[0m  [01;34mbandit23[0m      [01;34mbandit30-git[0m  [01;34mdrifter1[0m   [01;34mdrifter8[0m     [01;34mkrypton5[0m
+[01;34mbandit13[0m  [01;34mbandit24[0m      [01;34mbandit31[0m      [01;34mdrifter10[0m  [01;34mdrifter9[0m     [01;34mkrypton6[0m
+[01;34mbandit14[0m  [01;34mbandit25[0m      [01;34mbandit31-git[0m  [01;34mdrifter12[0m  [01;34mformulaone0[0m  [01;34mkrypton7[0m
+[01;34mbandit15[0m  [01;34mbandit26[0m      [01;34mbandit32[0m      [01;34mdrifter13[0m  [01;34mformulaone1[0m  [01;34mubuntu[0m
+[01;34mbandit16[0m  [01;34mbandit27[0m      [01;34mbandit33[0m      [01;34mdrifter14[0m  [01;34mformulaone2[0m
+[01;34mbandit17[0m  [01;34mbandit27-git[0m  [01;34mbandit4[0m       [01;34mdrifter15[0m  [01;34mformulaone3[0m
+[01;34mbandit18[0m  [01;34mbandit28[0m      [01;34mbandit5[0m       [01;34mdrifter2[0m   [01;34mformulaone5[0m
+[01;34mbandit19[0m  [01;34mbandit28-git[0m  [01;34mbandit6[0m       [01;34mdrifter3[0m   [01;34mformulaone6[0m
+[?2004h]0;bandit1@bandit: /home[01;32mbandit1@bandit[00m:[01;34m/home[00m$ cd badnit[K[K[K[Kndit1
+[?2004l[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls -a
+[?2004l-  [0m[01;34m.[0m  [01;34m..[0m  .bash_logout  .bashrc  .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ [K]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cd ~
+[?2004l[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cl[Kd ~
+[?2004l[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cle[K[Kd ..
+[?2004l[?2004h]0;bandit1@bandit: /home[01;32mbandit1@bandit[00m:[01;34m/home[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit1@bandit: /home[01;32mbandit1@bandit[00m:[01;34m/home[00m$ ls
+[?2004l[0m[01;34mbandit0[0m   [01;34mbandit13[0m  [01;34mbandit18[0m  [01;34mbandit22[0m  [01;34mbandit27[0m      [01;34mbandit29-git[0m  [01;34mbandit31-git[0m  [01;34mbandit6[0m   [01;34mdrifter1[0m   [01;34mdrifter15[0m  [01;34mdrifter6[0m     [01;34mformulaone1[0m  [01;34mkrypton1[0m  [01;34mkrypton6[0m
+[01;34mbandit1[0m   [01;34mbandit14[0m  [01;34mbandit19[0m  [01;34mbandit23[0m  [01;34mbandit27-git[0m  [01;34mbandit3[0m       [01;34mbandit32[0m      [01;34mbandit7[0m   [01;34mdrifter10[0m  [01;34mdrifter2[0m   [01;34mdrifter7[0m     [01;34mformulaone2[0m  [01;34mkrypton2[0m  [01;34mkrypton7[0m
+[01;34mbandit10[0m  [01;34mbandit15[0m  [01;34mbandit2[0m   [01;34mbandit24[0m  [01;34mbandit28[0m      [01;34mbandit30[0m      [01;34mbandit33[0m      [01;34mbandit8[0m   [01;34mdrifter12[0m  [01;34mdrifter3[0m   [01;34mdrifter8[0m     [01;34mformulaone3[0m  [01;34mkrypton3[0m  [01;34mubuntu[0m
+[01;34mbandit11[0m  [01;34mbandit16[0m  [01;34mbandit20[0m  [01;34mbandit25[0m  [01;34mbandit28-git[0m  [01;34mbandit30-git[0m  [01;34mbandit4[0m       [01;34mbandit9[0m   [01;34mdrifter13[0m  [01;34mdrifter4[0m   [01;34mdrifter9[0m     [01;34mformulaone5[0m  [01;34mkrypton4[0m
+[01;34mbandit12[0m  [01;34mbandit17[0m  [01;34mbandit21[0m  [01;34mbandit26[0m  [01;34mbandit29[0m      [01;34mbandit31[0m      [01;34mbandit5[0m       [01;34mdrifter0[0m  [01;34mdrifter14[0m  [01;34mdrifter5[0m   [01;34mformulaone0[0m  [01;34mformulaone6[0m  [01;34mkrypton5[0m
+[?2004h]0;bandit1@bandit: /home[01;32mbandit1@bandit[00m:[01;34m/home[00m$ cd [K[K[Kls -a
+[?2004l[0m[01;34m.[0m         [01;34mbandit11[0m  [01;34mbandit16[0m  [01;34mbandit20[0m  [01;34mbandit25[0m      [01;34mbandit28-git[0m  [01;34mbandit30-git[0m  [01;34mbandit4[0m  [01;34mbandit9[0m    [01;34mdrifter13[0m  [01;34mdrifter4[0m  [01;34mdrifter9[0m     [01;34mformulaone5[0m  [01;34mkrypton4[0m
+[01;34m..[0m        [01;34mbandit12[0m  [01;34mbandit17[0m  [01;34mbandit21[0m  [01;34mbandit26[0m      [01;34mbandit29[0m      [01;34mbandit31[0m      [01;34mbandit5[0m  [01;34mdrifter0[0m   [01;34mdrifter14[0m  [01;34mdrifter5[0m  [01;34mformulaone0[0m  [01;34mformulaone6[0m  [01;34mkrypton5[0m
+[01;34mbandit0[0m   [01;34mbandit13[0m  [01;34mbandit18[0m  [01;34mbandit22[0m  [01;34mbandit27[0m      [01;34mbandit29-git[0m  [01;34mbandit31-git[0m  [01;34mbandit6[0m  [01;34mdrifter1[0m   [01;34mdrifter15[0m  [01;34mdrifter6[0m  [01;34mformulaone1[0m  [01;34mkrypton1[0m     [01;34mkrypton6[0m
+[01;34mbandit1[0m   [01;34mbandit14[0m  [01;34mbandit19[0m  [01;34mbandit23[0m  [01;34mbandit27-git[0m  [01;34mbandit3[0m       [01;34mbandit32[0m      [01;34mbandit7[0m  [01;34mdrifter10[0m  [01;34mdrifter2[0m   [01;34mdrifter7[0m  [01;34mformulaone2[0m  [01;34mkrypton2[0m     [01;34mkrypton7[0m
+[01;34mbandit10[0m  [01;34mbandit15[0m  [01;34mbandit2[0m   [01;34mbandit24[0m  [01;34mbandit28[0m      [01;34mbandit30[0m      [01;34mbandit33[0m      [01;34mbandit8[0m  [01;34mdrifter12[0m  [01;34mdrifter3[0m   [01;34mdrifter8[0m  [01;34mformulaone3[0m  [01;34mkrypton3[0m     [01;34mubuntu[0m
+[?2004h]0;bandit1@bandit: /home[01;32mbandit1@bandit[00m:[01;34m/home[00m$ cd bandit1
+[?2004l[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ l[Kcat -b -
+[?2004l^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat -b "-"
+[?2004l^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat < -file[K[K[K[Kfile [K_name[K[K[K[K[K[K[K[K[K[K-
+[?2004l263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:14:06 EDT 2024
+===================================
+Wed Aug 28 09:14:11 EDT 2024
+===================================
+Wed Aug 28 09:14:27 EDT 2024
+===================================
+Wed Aug 28 09:14:59 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ ls 
+[?2004lspaces in this filename
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ cat -b "spaces in this filename" 
+[?2004l     1	MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:15:35 EDT 2024
+===================================
+Wed Aug 28 09:16:05 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ [K]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ [K]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ cd inhere/
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls -a
+[?2004l[0m[01;34m.[0m  [01;34m..[0m  ...Hiding-From-You
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ cat "..
+../                 ...Hiding-From-You  
+]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ cat "...Hiding-From-You" 
+[?2004l2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:16:47 EDT 2024
+===================================
+Wed Aug 28 09:16:54 EDT 2024
+===================================
+Wed Aug 28 09:23:20 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ cd inhere/
+[?2004l[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l[0m[01;34mmaybehere00[0m  [01;34mmaybehere02[0m  [01;34mmaybehere04[0m  [01;34mmaybehere06[0m  [01;34mmaybehere08[0m  [01;34mmaybehere10[0m  [01;34mmaybehere12[0m  [01;34mmaybehere14[0m  [01;34mmaybehere16[0m  [01;34mmaybehere18[0m
+[01;34mmaybehere01[0m  [01;34mmaybehere03[0m  [01;34mmaybehere05[0m  [01;34mmaybehere07[0m  [01;34mmaybehere09[0m  [01;34mmaybehere11[0m  [01;34mmaybehere13[0m  [01;34mmaybehere15[0m  [01;34mmaybehere17[0m  [01;34mmaybehere19[0m
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ grep [K[K[K[K[Kls -l
+[?2004ltotal 80
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [0m[01;34mmaybehere00[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere01[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere02[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere03[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere04[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere05[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere06[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere07[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere08[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere09[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere10[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere11[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere12[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere13[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere14[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere15[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere16[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere17[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere18[0m
+drwxr-x--- 2 root bandit5 4096 Jul 17 15:57 [01;34mmaybehere19[0m
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ ls * -l
+[?2004lmaybehere00:
+total 44
+-rwxr-x--- 1 root bandit5 1039 Jul 17 15:57 [0m[01;32m-file1[0m
+-rw-r----- 1 root bandit5 9388 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 7378 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 6118 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 6850 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 1915 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere01:
+total 52
+-rwxr-x--- 1 root bandit5 6028 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5  288 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 9641 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 4139 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 4543 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 8834 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere02:
+total 40
+-rwxr-x--- 1 root bandit5 3801 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 3511 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 4932 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 6746 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 8488 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 2275 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere03:
+total 44
+-rwxr-x--- 1 root bandit5  315 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 6595 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 8275 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 2190 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 3385 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 9234 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere04:
+total 36
+-rwxr-x--- 1 root bandit5 4410 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 2619 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 2117 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 5532 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 2491 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 6002 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere05:
+total 36
+-rwxr-x--- 1 root bandit5 2346 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 5959 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 2572 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5  880 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 2420 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 8585 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere06:
+total 36
+-rwxr-x--- 1 root bandit5 5731 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 1076 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 3443 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 4073 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 4251 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 8065 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere07:
+total 36
+-rwxr-x--- 1 root bandit5 3663 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 2488 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 3362 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 4130 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 9064 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 1022 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere08:
+total 32
+-rwxr-x--- 1 root bandit5 1077 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 3825 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 2650 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5  215 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 3693 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 9138 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere09:
+total 44
+-rwxr-x--- 1 root bandit5 3628 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5  774 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 7961 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 5301 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 8716 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 7569 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere10:
+total 32
+-rwxr-x--- 1 root bandit5 1052 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 1991 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 1237 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 8269 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 3570 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 2155 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere11:
+total 44
+-rwxr-x--- 1 root bandit5 1211 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 4559 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 8854 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 3147 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5  503 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 8845 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere12:
+total 40
+-rwxr-x--- 1 root bandit5 9678 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5  251 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 9076 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 2157 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 2460 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 1639 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere13:
+total 28
+-rwxr-x--- 1 root bandit5 1359 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 1423 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 3014 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 3952 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5  952 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 4389 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere14:
+total 36
+-rwxr-x--- 1 root bandit5 4282 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 8351 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 3756 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 1382 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5  871 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5  376 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere15:
+total 44
+-rwxr-x--- 1 root bandit5 8794 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 9499 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 6299 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 1623 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5   51 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 1637 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere16:
+total 48
+-rwxr-x--- 1 root bandit5 4277 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 5301 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 8085 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 9773 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 3146 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 7509 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere17:
+total 40
+-rwxr-x--- 1 root bandit5 1133 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 1791 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 4422 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 8361 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 3387 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 6381 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere18:
+total 44
+-rwxr-x--- 1 root bandit5 9697 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5   77 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 2306 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 7334 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 6348 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 7040 Jul 17 15:57 [01;32mspaces file3[0m
+
+maybehere19:
+total 48
+-rwxr-x--- 1 root bandit5 6302 Jul 17 15:57 [01;32m-file1[0m
+-rw-r----- 1 root bandit5 5594 Jul 17 15:57 -file2
+-rwxr-x--- 1 root bandit5 7965 Jul 17 15:57 [01;32m-file3[0m
+-rwxr-x--- 1 root bandit5 7186 Jul 17 15:57 [01;32mspaces file1[0m
+-rw-r----- 1 root bandit5 8785 Jul 17 15:57 spaces file2
+-rwxr-x--- 1 root bandit5 2307 Jul 17 15:57 [01;32mspaces file3[0m
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ man grep
+[?2004l[?1049h[22;0;0t[?1h=[4mGREP[24m(1)                                                                 User Commands                                                                 [4mGREP[24m(1)[m
+[m
+[1mNAME[0m[m
+       grep, egrep, fgrep, rgrep - print lines that match patterns[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mgrep [22m[[4mOPTION[24m...] [4mPATTERNS[24m [[4mFILE[24m...][m
+       [1mgrep [22m[[4mOPTION[24m...] [1m-e [4m[22mPATTERNS[24m ... [[4mFILE[24m...][m
+       [1mgrep [22m[[4mOPTION[24m...] [1m-f [4m[22mPATTERN_FILE[24m ... [[4mFILE[24m...][m
+[m
+[1mDESCRIPTION[0m[m
+       [1mgrep  [22msearches  for [4mPATTERNS[24m in each [4mFILE[24m.  [4mPATTERNS[24m is one or more patterns separated by newline characters, and [1mgrep [22mprints each line that matches a[m
+       pattern.  Typically [4mPATTERNS[24m should be quoted when [1mgrep [22mis used in a shell command.[m
+[m
+       A [4mFILE[24m of ‚Äú[1m-[22m‚Äù stands for standard input.  If no [4mFILE[24m is given, recursive searches examine  the  working  directory,  and  nonrecursive  searches  read[m
+       standard input.[m
+[m
+       Debian  also includes the variant programs [1megrep[22m, [1mfgrep [22mand [1mrgrep[22m.  These programs are the same as [1mgrep -E[22m, [1mgrep -F[22m, and [1mgrep -r[22m, respectively.  These[m
+       variants are deprecated upstream, but Debian provides for backward compatibility. For portability reasons, it is  recommended  to  avoid  the  variant[m
+       programs, and use [1mgrep [22mwith the related option instead.[m
+[m
+[1mOPTIONS[0m[m
+   [1mGeneric Program Information[0m[m
+       [1m--help [22mOutput a usage message and exit.[m
+[m
+       [1m-V[22m, [1m--version[0m[m
+              Output the version number of [1mgrep [22mand exit.[m
+[m
+   [1mPattern Syntax[0m[m
+       [1m-E[22m, [1m--extended-regexp[0m[m
+              Interpret [4mPATTERNS[24m as extended regular expressions (EREs, see below).[m
+[m
+       [1m-F[22m, [1m--fixed-strings[0m[m
+              Interpret [4mPATTERNS[24m as fixed strings, not regular expressions.[m
+[m
+       [1m-G[22m, [1m--basic-regexp[0m[m
+              Interpret [4mPATTERNS[24m as basic regular expressions (BREs, see below).  This is the default.[m
+[m
+       [1m-P[22m, [1m--perl-regexp[0m[m
+              Interpret [4mPATTERNS[24m as Perl-compatible regular expressions (PCREs).  This option is experimental when combined with the [1m-z [22m([1m--null-data[22m) option,[m
+              and [1mgrep -P [22mmay warn of unimplemented features.[m
+[7m Manual page grep(1) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l[23;0;0t[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ file [K[K[K[K[Kman file
+[?2004l[?1049h[22;0;0t[?1h=[4mFILE[24m(1)                                                             General Commands Manual                                                           [4mFILE[24m(1)[m
+[m
+[1mNAME[0m[m
+       file ‚Äî determine file type[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mfile  [22m[[1m-bcdEhiklLNnprsSvzZ0[22m]  [[1m--apple[22m]  [[1m--exclude-quiet[22m]  [[1m--extension[22m]  [[1m--mime-encoding[22m]  [[1m--mime-type[22m] [[1m-e [4m[22mtestname[24m] [[1m-F [4m[22mseparator[24m] [[1m-f [4m[22mnamefile[24m][m
+            [[1m-m [4m[22mmagicfiles[24m] [[1m-P [4m[22mname=value[24m] [4mfile[24m [4m...[0m[m
+       [1mfile -C [22m[[1m-m [4m[22mmagicfiles[24m][m
+       [1mfile [22m[[1m--help[22m][m
+[m
+[1mDESCRIPTION[0m[m
+       This manual page documents version 5.45 of the [1mfile [22mcommand.[m
+[m
+       [1mfile [22mtests each argument in an attempt to classify it.  There are three sets of tests, performed in this order: filesystem  tests,  magic  tests,  and[m
+       language tests.  The [4mfirst[24m test that succeeds causes the file type to be printed.[m
+[m
+       The  type  printed  will  usually contain one of the words [4mtext[24m (the file contains only printing characters and a few common control characters and is[m
+       probably safe to read on an ASCII terminal), [4mexecutable[24m (the file contains the result of compiling a program in a form  understandable  to  some  UNIX[m
+       kernel  or  another),  or [4mdata[24m meaning anything else (data is usually ‚Äúbinary‚Äù or non-printable).  Exceptions are well-known file formats (core files,[m
+       tar archives) that are known to contain binary data.  When modifying magic files or the program itself, make sure to [4mpreserve[24m [4mthese[24m  [4mkeywords[24m.   Users[m
+       depend  on knowing that all the readable files in a directory have the word ‚Äútext‚Äù printed.  Don't do as Berkeley did and change ‚Äúshell commands text‚Äù[m
+       to ‚Äúshell script‚Äù.[m
+[m
+       The filesystem tests are based on examining the return from a [4mstat[24m(2) system call.  The program checks to see if the file is empty, or  if  it's  some[m
+       sort  of  special  file.   Any known file types appropriate to the system you are running on (sockets, symbolic links, or named pipes (FIFOs) on those[m
+       systems that implement them) are intuited if they are defined in the system header file <[4msys/stat.h[24m>.[m
+[m
+       The magic tests are used to check for files with data in particular fixed formats.  The canonical example of this is  a  binary  executable  (compiled[m
+       program) a.out file, whose format is defined in <[4melf.h[24m>, <[4ma.out.h[24m> and possibly <[4mexec.h[24m> in the standard include directory.  These files have a ‚Äúmagic[m
+       number‚Äù  stored  in  a  particular place near the beginning of the file that tells the UNIX operating system that the file is a binary executable, and[m
+       which of several types thereof.  The concept of a ‚Äúmagic number‚Äù has been applied by extension to data files.  Any file with some invariant identifier[m
+       at a small fixed offset into the file can usually be described in this way.  The information identifying these files is read from /etc/magic  and  the[m
+       compiled  magic file [4m/usr/share/misc/magic.mgc[24m, or the files in the directory [4m/usr/share/misc/magic[24m if the compiled file does not exist.  In addition,[m
+       if [4m$HOME/.magic.mgc[24m or [4m$HOME/.magic[24m exists, it will be used in preference to the system magic files.[m
+[m
+       If a file does not match any of the entries in the magic file, it is examined to see if it seems to be a text file.  ASCII, ISO-8859-x, non-ISO  8-bit[m
+       extended-ASCII  character sets (such as those used on Macintosh and IBM PC systems), UTF-8-encoded Unicode, UTF-16-encoded Unicode, and EBCDIC charac‚Äê[m
+       ter sets can be distinguished by the different ranges and sequences of bytes that constitute printable text in each set.  If  a  file  passes  any  of[m
+       these  tests,  its character set is reported.  ASCII, ISO-8859-x, UTF-8, and extended-ASCII files are identified as ‚Äútext‚Äù because they will be mostly[m
+       readable on nearly any terminal; UTF-16 and EBCDIC are only ‚Äúcharacter data‚Äù because, while they contain text, it is text that will  require  transla‚Äê[m
+[7m Manual page file(1) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l[23;0;0t[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ file * [K *
+[?2004lmaybehere00: directory
+maybehere01: directory
+maybehere02: directory
+maybehere03: directory
+maybehere04: directory
+maybehere05: directory
+maybehere06: directory
+maybehere07: directory
+maybehere08: directory
+maybehere09: directory
+maybehere10: directory
+maybehere11: directory
+maybehere12: directory
+maybehere13: directory
+maybehere14: directory
+maybehere15: directory
+maybehere16: directory
+maybehere17: directory
+maybehere18: directory
+maybehere19: directory
+maybehere00: directory
+maybehere01: directory
+maybehere02: directory
+maybehere03: directory
+maybehere04: directory
+maybehere05: directory
+maybehere06: directory
+maybehere07: directory
+maybehere08: directory
+maybehere09: directory
+maybehere10: directory
+maybehere11: directory
+maybehere12: directory
+maybehere13: directory
+maybehere14: directory
+maybehere15: directory
+maybehere16: directory
+maybehere17: directory
+maybehere18: directory
+maybehere19: directory
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ file */*
+[?2004lmaybehere00/-file1:       ASCII text, with very long lines (1038)
+maybehere00/-file2:       ASCII text, with very long lines (9387)
+maybehere00/-file3:       OpenPGP Secret Key
+maybehere00/spaces file1: ASCII text, with very long lines (6117)
+maybehere00/spaces file2: ASCII text, with very long lines (6849)
+maybehere00/spaces file3: data
+maybehere01/-file1:       ASCII text, with very long lines (6027)
+maybehere01/-file2:       ASCII text
+maybehere01/-file3:       data
+maybehere01/spaces file1: ASCII text, with very long lines (4138)
+maybehere01/spaces file2: ASCII text, with very long lines (4542)
+maybehere01/spaces file3: data
+maybehere02/-file1:       ASCII text, with very long lines (3800)
+maybehere02/-file2:       X1 archive data
+maybehere02/-file3:       data
+maybehere02/spaces file1: ASCII text, with very long lines (6745)
+maybehere02/spaces file2: ASCII text, with very long lines (8487)
+maybehere02/spaces file3: data
+maybehere03/-file1:       ASCII text, with very long lines (314)
+maybehere03/-file2:       ASCII text, with very long lines (6594)
+maybehere03/-file3:       data
+maybehere03/spaces file1: ASCII text, with very long lines (2189)
+maybehere03/spaces file2: ASCII text, with very long lines (3384)
+maybehere03/spaces file3: data
+maybehere04/-file1:       ASCII text, with very long lines (4409)
+maybehere04/-file2:       ASCII text, with very long lines (2618)
+maybehere04/-file3:       data
+maybehere04/spaces file1: ASCII text, with very long lines (5531)
+maybehere04/spaces file2: ASCII text, with very long lines (2490)
+maybehere04/spaces file3: data
+maybehere05/-file1:       ASCII text, with very long lines (2345)
+maybehere05/-file2:       ASCII text, with very long lines (5958)
+maybehere05/-file3:       OpenPGP Public Key
+maybehere05/spaces file1: ASCII text, with very long lines (879)
+maybehere05/spaces file2: ASCII text, with very long lines (2419)
+maybehere05/spaces file3: data
+maybehere06/-file1:       ASCII text, with very long lines (5730)
+maybehere06/-file2:       ASCII text, with very long lines (1075)
+maybehere06/-file3:       data
+maybehere06/spaces file1: ASCII text, with very long lines (4072)
+maybehere06/spaces file2: ASCII text, with very long lines (4250)
+maybehere06/spaces file3: data
+maybehere07/-file1:       ASCII text, with very long lines (3662)
+maybehere07/-file2:       ASCII text, with very long lines (2487)
+maybehere07/-file3:       data
+maybehere07/spaces file1: ASCII text, with very long lines (4129)
+maybehere07/spaces file2: ASCII text, with very long lines (9063)
+maybehere07/spaces file3: data
+maybehere08/-file1:       ASCII text, with very long lines (1076)
+maybehere08/-file2:       ASCII text, with very long lines (3824)
+maybehere08/-file3:       data
+maybehere08/spaces file1: ASCII text
+maybehere08/spaces file2: ASCII text, with very long lines (3692)
+maybehere08/spaces file3: data
+maybehere09/-file1:       ASCII text, with very long lines (3627)
+maybehere09/-file2:       ASCII text, with very long lines (773)
+maybehere09/-file3:       data
+maybehere09/spaces file1: ASCII text, with very long lines (5300)
+maybehere09/spaces file2: ASCII text, with very long lines (8715)
+maybehere09/spaces file3: data
+maybehere10/-file1:       ASCII text, with very long lines (1051)
+maybehere10/-file2:       ASCII text, with very long lines (1990)
+maybehere10/-file3:       data
+maybehere10/spaces file1: ASCII text, with very long lines (8268)
+maybehere10/spaces file2: ASCII text, with very long lines (3569)
+maybehere10/spaces file3: data
+maybehere11/-file1:       ASCII text, with very long lines (1210)
+maybehere11/-file2:       ASCII text, with very long lines (4558)
+maybehere11/-file3:       data
+maybehere11/spaces file1: ASCII text, with very long lines (3146)
+maybehere11/spaces file2: ASCII text, with very long lines (502)
+maybehere11/spaces file3: data
+maybehere12/-file1:       ASCII text, with very long lines (9677)
+maybehere12/-file2:       ASCII text
+maybehere12/-file3:       data
+maybehere12/spaces file1: ASCII text, with very long lines (2156)
+maybehere12/spaces file2: ASCII text, with very long lines (2459)
+maybehere12/spaces file3: data
+maybehere13/-file1:       ASCII text, with very long lines (1358)
+maybehere13/-file2:       ASCII text, with very long lines (1422)
+maybehere13/-file3:       data
+maybehere13/spaces file1: ASCII text, with very long lines (3951)
+maybehere13/spaces file2: ASCII text, with very long lines (951)
+maybehere13/spaces file3: data
+maybehere14/-file1:       ASCII text, with very long lines (4281)
+maybehere14/-file2:       ASCII text, with very long lines (8350)
+maybehere14/-file3:       OpenPGP Secret Key
+maybehere14/spaces file1: ASCII text, with very long lines (1381)
+maybehere14/spaces file2: ASCII text, with very long lines (870)
+maybehere14/spaces file3: data
+maybehere15/-file1:       ASCII text, with very long lines (8793)
+maybehere15/-file2:       ASCII text, with very long lines (9498)
+maybehere15/-file3:       data
+maybehere15/spaces file1: ASCII text, with very long lines (1622)
+maybehere15/spaces file2: ASCII text
+maybehere15/spaces file3: data
+maybehere16/-file1:       ASCII text, with very long lines (4276)
+maybehere16/-file2:       ASCII text, with very long lines (5300)
+maybehere16/-file3:       data
+maybehere16/spaces file1: ASCII text, with very long lines (9772)
+maybehere16/spaces file2: ASCII text, with very long lines (3145)
+maybehere16/spaces file3: data
+maybehere17/-file1:       ASCII text, with very long lines (1132)
+maybehere17/-file2:       ASCII text, with very long lines (1790)
+maybehere17/-file3:       data
+maybehere17/spaces file1: ASCII text, with very long lines (8360)
+maybehere17/spaces file2: ASCII text, with very long lines (3386)
+maybehere17/spaces file3: data
+maybehere18/-file1:       ASCII text, with very long lines (9696)
+maybehere18/-file2:       ASCII text
+maybehere18/-file3:       data
+maybehere18/spaces file1: ASCII text, with very long lines (7333)
+maybehere18/spaces file2: ASCII text, with very long lines (6347)
+maybehere18/spaces file3: data
+maybehere19/-file1:       ASCII text, with very long lines (6301)
+maybehere19/-file2:       ASCII text, with very long lines (5593)
+maybehere19/-file3:       data
+maybehere19/spaces file1: ASCII text, with very long lines (7185)
+maybehere19/spaces file2: ASCII text, with very long lines (8784)
+maybehere19/spaces file3: data
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ man file
+[?2004l[?1049h[22;0;0t[?1h=[4mFILE[24m(1)                                                             General Commands Manual                                                           [4mFILE[24m(1)[m
+[m
+[1mNAME[0m[m
+       file ‚Äî determine file type[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mfile  [22m[[1m-bcdEhiklLNnprsSvzZ0[22m]  [[1m--apple[22m]  [[1m--exclude-quiet[22m]  [[1m--extension[22m]  [[1m--mime-encoding[22m]  [[1m--mime-type[22m] [[1m-e [4m[22mtestname[24m] [[1m-F [4m[22mseparator[24m] [[1m-f [4m[22mnamefile[24m][m
+            [[1m-m [4m[22mmagicfiles[24m] [[1m-P [4m[22mname=value[24m] [4mfile[24m [4m...[0m[m
+       [1mfile -C [22m[[1m-m [4m[22mmagicfiles[24m][m
+       [1mfile [22m[[1m--help[22m][m
+[m
+[1mDESCRIPTION[0m[m
+       This manual page documents version 5.45 of the [1mfile [22mcommand.[m
+[m
+       [1mfile [22mtests each argument in an attempt to classify it.  There are three sets of tests, performed in this order: filesystem  tests,  magic  tests,  and[m
+       language tests.  The [4mfirst[24m test that succeeds causes the file type to be printed.[m
+[m
+       The  type  printed  will  usually contain one of the words [4mtext[24m (the file contains only printing characters and a few common control characters and is[m
+       probably safe to read on an ASCII terminal), [4mexecutable[24m (the file contains the result of compiling a program in a form  understandable  to  some  UNIX[m
+       kernel  or  another),  or [4mdata[24m meaning anything else (data is usually ‚Äúbinary‚Äù or non-printable).  Exceptions are well-known file formats (core files,[m
+       tar archives) that are known to contain binary data.  When modifying magic files or the program itself, make sure to [4mpreserve[24m [4mthese[24m  [4mkeywords[24m.   Users[m
+       depend  on knowing that all the readable files in a directory have the word ‚Äútext‚Äù printed.  Don't do as Berkeley did and change ‚Äúshell commands text‚Äù[m
+       to ‚Äúshell script‚Äù.[m
+[m
+       The filesystem tests are based on examining the return from a [4mstat[24m(2) system call.  The program checks to see if the file is empty, or  if  it's  some[m
+       sort  of  special  file.   Any known file types appropriate to the system you are running on (sockets, symbolic links, or named pipes (FIFOs) on those[m
+       systems that implement them) are intuited if they are defined in the system header file <[4msys/stat.h[24m>.[m
+[m
+       The magic tests are used to check for files with data in particular fixed formats.  The canonical example of this is  a  binary  executable  (compiled[m
+       program) a.out file, whose format is defined in <[4melf.h[24m>, <[4ma.out.h[24m> and possibly <[4mexec.h[24m> in the standard include directory.  These files have a ‚Äúmagic[m
+       number‚Äù  stored  in  a  particular place near the beginning of the file that tells the UNIX operating system that the file is a binary executable, and[m
+       which of several types thereof.  The concept of a ‚Äúmagic number‚Äù has been applied by extension to data files.  Any file with some invariant identifier[m
+       at a small fixed offset into the file can usually be described in this way.  The information identifying these files is read from /etc/magic  and  the[m
+       compiled  magic file [4m/usr/share/misc/magic.mgc[24m, or the files in the directory [4m/usr/share/misc/magic[24m if the compiled file does not exist.  In addition,[m
+       if [4m$HOME/.magic.mgc[24m or [4m$HOME/.magic[24m exists, it will be used in preference to the system magic files.[m
+[m
+       If a file does not match any of the entries in the magic file, it is examined to see if it seems to be a text file.  ASCII, ISO-8859-x, non-ISO  8-bit[m
+       extended-ASCII  character sets (such as those used on Macintosh and IBM PC systems), UTF-8-encoded Unicode, UTF-16-encoded Unicode, and EBCDIC charac‚Äê[m
+       ter sets can be distinguished by the different ranges and sequences of bytes that constitute printable text in each set.  If  a  file  passes  any  of[m
+       these  tests,  its character set is reported.  ASCII, ISO-8859-x, UTF-8, and extended-ASCII files are identified as ‚Äútext‚Äù because they will be mostly[m
+       readable on nearly any terminal; UTF-16 and EBCDIC are only ‚Äúcharacter data‚Äù because, while they contain text, it is text that will  require  transla‚Äê[m
+[7m Manual page file(1) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l[23;0;0t[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ cat maybehere00/-file3
+[?2004lï‡ƒ‰ˇ•TN êMr¡	‡Ãâv£µ∞˝Ï‡f(/ìÏÎ\(FúØ£∂ò	Õœπö»◊∏∆MEïÍ˙∏,8'3Ö`+8≠i(„Ò˘ÅaéÿﬂRÏ“„XtÓù¬U–´Xÿ◊ﬂIPﬂœR´/`ˆ⁄Ω,î1ƒ0_#. ˛6¡SùÅMÙàîi˘|”e)®'v€Æ ˚sv i>HJÌ≠£ ºv‡ì-ÒªâÌUûÅﬂMÎ3œ°À◊	8pû€⁄”U”íOøˇ&˙Y2^¨®,]1ÚéÍaXzÛ{ﬁSl¢¢%§µ¶≤a1KËåZŸœ3lvJ`kÃƒ≠ª„®À~%XÃOtÑΩÙSUéC—˜BN5Ë+ä*Úÿ@â≈nöÙA}6≈:√IÍ¬)~nÍÓAÄT?3%´0˙Æﬁà ¿ó3ïp≤êyQ ˝Y˙£éäÑV˜'´T_|—qa£MrâW–>¡ˆ`≤∫Ü@©!b*ΩÔÿ˙ 1çXØ»_YZ$›áA˘[ àñÔ⁄ƒ?√ïâ¥ùq≤“—Ú^ Å@Ìœ¡ÆæÄ\eH.-8#)≈Âö…§\nM'&∆˛·QS¶ìÒEe„L¬	ãŒ8¯ÃdÏû«ûz=⁄~”?Y’ÿÁEπhã]¢*:˘Y÷™~tΩ»%.˝ÚIp°hiÎ∫+Ùø-Ç˜WFËD?ÏﬁÌêA”\∏ô]æ/OÖnÂ…æwÉíâG aY“≈ûî⁄ßA8¥
+QÊ#8âº˝W_Éìÿœ≤)øX/#‰.˚àÚ°	7∂∏†∏Iè®IÚõh<ù})1s’`SMir(PS¢iÂÑ‘Óoh-t§áG&çv_›4Áœº1ó	ÚΩ÷ü€¨0a-ë›vØo»Ã˛åD3UÃ?Ë–|¶˝sº^B’'ÓWﬂÒ˝ÛÚr«ŸVrÂê£+Öﬁì”˘µE+÷mJã—Ì¡ñÉG;∑πOáËqj[O˙®ßú$gC©ßÇ‰f¡…††∂E\(Wãπ|~p¡œ˘®ï¶‹áΩ¸J≠÷VX≥CùÉ3√,›ÿCukº§\Ó	jfr∆[ûj—Q£±!1µ∏ÎÕÖ…bÚ.Ä\Î5®* 'ÎlÕô°≠·BÓÏTÒáÛ?;Ç!óÁ±“∑_ßU`ü™ êöıSÜèÔ" ⁄uÄF÷ô™;Pß#6∞Q¡sTLWØÜrÌ»⁄Ûß	!P--≥ I≤?Âç%Î˚Ça÷	géŸ54ÃpÔuJÊzrloh§—z,î?4CR8vN„fÍ:	{åÌe˘M™8+Â¨ Ï‡ˇáöÿÿ_aF
+XÀGÖé=YI∏= VŸ≥µãä^C˛t¥”«õÜ©Öû~G°Òpu´ÉY¸±UXE¡bX
+äÀª,»#a'±í¨c,MÁ«[ôÍtWîÏΩ®º~¯Jœ,òF»ı–Ê+ –iä∞8ñ[Qdt~vê›§óÒw	 u#Vü¶ Pv^…{õzû:EÚCª˛€.z.o •ÄC‘„◊=U@Œˇ"_ﬂÅ6ƒr%Hc#è&Èoû9#5FwÆ\†T´wîST⁄jåF/IÖ≠¬°ë2»ßò]¢™øyK(ãM5ú œÒaô/Ò¡÷1¨∑\¬:EE⁄∆y∆
+ÉÏùœµùπËËgTåøÄõZ6zp<0__/!≠G6ˆE⁄pPAï,kLù´µ	„mü√ûˆØ˝ë3ı∆Ig∏¡á`—Ò‘>ÒFå(97Åv/0EG™˚NˇŒE
+¶Y¸Ñ„z`Ü’2‡#aA®ß`â∆ﬂPäºÊ˛|÷cNÅ°ºSêà6dàLf{√≥)î>'”w|Îu2„¢§$z‡ç"OåSÅµZ∫+xÌoÇa˚‚îê‘y˛À.¡∏<òM=ôgÌû⁄ö ∆'"πJ«√o©≈›l⁄¯- ~±&ÏíΩp®€è‰cLqLÈ……~UÌE 1ÅuÖ§çC_1:ØÌ8ø˘∑Àç‚üÜ¯°@ÇËäÌ*™~J?—ÆgsØ0áoŒ5˛í4£ø…á√∑ÁaÉí ºE¶∆ÑÇ`õ.4
+»çCÎêüBˆ≈+55:`wÊ8äù<Ò ûÂŸoë⁄bÖòêYí«0qV?"ôÙ¸‡>∞= ∫?Ù‚@jıèœπ+,…! Z˚)\,ñOãoƒa”∫∞…Ì√£≈!Ùt∂jÑo—∑1ÑÏ¬Ä∑Fi”jº√ËJ∏Qnç_pËˇ™ù‰˜“‹fAZ.ÜÊé‡è∂¥GÜ(Ú3˜zﬁ∏·åkLâLx'ëWÃ•·má©ƒM∂úGﬁø‘J6ån|:TeÉCä6…ﬂî©^~Z√sBÕÚ^≥í™/õπË‹‚|9œVó¨GÊÁº94éS£(¡7Hî˜Z∏‡v›Ÿ1∏Ò%ˆpiíB‘ï\ïØåä‘ÿ	Ÿœ]7ö/∞]®î
+≥Ù)RÖÜK`á´OØeÚ`0Ú3ìÔ—˘ÍP¡®rwAÔÜ˘–~k(≠Eõ´"á}#öE%
+sN∫ñFD…î58
+”ñp≥r:ˆ5m%Õ	√"œπ‡à÷Õwè}ùö'oôÛ©V–ë+≠à” ó∫∫zò£/NkÌÒWhZF≠  ˙gá˙-èåõz¢ˇ≈ópø¶d˙„ÔÅ∆pÕ6Ü∞V“¸£<<ädÏY ‰∞ oàÕöç‘I˝ÌÓ]bZËø-ßî˛-¢øhOã'E·∆åÜUò©p±uÌ&.vUk±rñWIæßw6'ìœQ|sxáÉ¢Õ¢Ë4ë™Ç@_~ËÉïËc(–ù}#ãc¬C?d4|∞H!ÿ∫˝Éi¥û#⁄ÌFÈê¡-ˆ‚°iw`‰6O#ßI∞E(Ó˘Fàô$Oi;îN∂u§˝ï§õœ·>˝ÉWÔ”∑b∏∫S;rQ‹∞“Ñ%kí∏®Æ-«*N˜ï¥ás,Ω€s° pìíﬁ…qr8ÜE$õ◊á"–3îìSø¥°Ù_ˆ	±Ûº˙Ÿ€XıﬁX˝T=ÒÅ7ü˛]´`"°ÛF∫∏_◊ï3{:≈Ã*¢BRƒˇ˜ÿóÃ‘ı¨j4Ôˇ§:oÌ'=I¸¿ÿûº“;®û7D•ß›D˛nSÈ €rº`ÍƒI•hç€∑ECMÚ9GáÜg›J_*‚ë9)@åXoMVÓtAXôGïô$
+h˚;o€ŒÿH“"óa%«†M\%5 %nr‘Ÿñá1-Gx7¯z‡a3Ã\ä•j`ÅÖ)GTÓ™nWá3∞†IpO[óGÑ®AŒÆıµj$—˝éfTÊ£ô´ì#`N¶ôáê’rb/eVÏÎéüW1*sÿ!óP,èD¬›d~|Ô//Ç7 Ôt7l8≤8¯K∂àu8ç|’ï—ÏE_˛ÍÃÅÎ&SâCCª\Ï/˘y˘∫¡?> GÆù≥©7ªK,£òË	{s)ÆÆM˝=«/˘«H}QÔF¨ˇ¨±i"œ∑‘¯@Â’ë3yp[&™ΩkÃÈÚ}KØrWâ·C∫°íü≈=Ô:aË•#≥ïsƒÓ(»í!JK∏ÈÖÎm4M√+Ê‡™Q‡ìÓ„Ae
+Õ]U
+Ù^Tq[,≈ƒdŸq°∑"Ç+ª•†]ﬂ5Ø°ƒÜçsqËEk,‰?®_nÑ‚«/˛z∞ÔCJdÔ…¢†28Œf§üs;WFç…µ(ë¬[≥€ñÉU%ÿÉ∂õ/Ü¡âYm¢(ı7\5€«l`≥(jS93Ï¸ƒCGƒì6Â+C[ÔçWó∫*ú|—ˇX|Í8ÆŒ•)
+éQëhõê1QVp5t≥)˜ìñ0#fr’p Ëj>Ú}3∑\”ÓûªÛí–üıa–0Ûrí•ÑÛ≠f•|˙™ëæÿ%Wä Pn∂U†Õpc†Â/9ﬂﬂ	ıËuõ'|ì(ÇÀc\Jß»<t.	>eÍÜ‡í∞hß˙µ‰/CÄ†ùWGªiÂ£JÄµ≥J∑€g¡‡_≥ßÿœˆN¢RØøkzÚÿŸÖò•øï∏ Eã€\®’‹¥íHë¢§F¸ó˛ç@hø¥_+Xç3jªP±(‰€ﬂM ›Ω™ÛàÄbHœ4Hò2ÿ˛âRyÉl[+A∫H2ü	™‚.˘Ø’N{e„ß∂\GáY=íé_KÔH¢ &:æªû&ú°&#–r
+∆Ééﬁ&--l#3W˝q!ó)Bà§ıß—≤û‡≠“”YØ‡yÕ,«;EÙ Œ~.ckrû∂ﬂ¶˜G¸Gñ“xføR⁄pEËﬁÕÑX	O›ÃÊd˛™ÂG|C‰∏ÃÏ≠«fÑ}{Å©¶°≈∑mwt8;vEì·Æµqí˝ˇïÀJICc`•G“~pH)”eúÆí∑∆Üu¥#∞Ö=ΩK1Ä∑(Æ¢õN.CnæÑ|âãÒ}a‹•bïZI6—•ƒˇÒ‡…Ò_> 1Û+ÈÍ˘˛˜º˘*ÎÀät˙I–ñ˛É´ÀÍ:áÓÒ‡∞ç()AÏ‹§ky±%¡ˆ‰ë€'DE‘∏õ¿EÜG∏“#∏ =„6BÓjÃDÿ&ÿ[ﬁ_”gúÑî-ûHƒπ*/  '«∏k,°ö˘?˚ueßYŸ“∑∑ˇD\6◊X*O’Ï^PÏ”Ô?≈%ΩtiW¶¥Ò/£Ω`oWñÎÓ Kz“®Ø‹Oó:ëf¸π;äË©’Êökõ&ÿÄ‚⁄«+°sÒ†K§”^ä<˘vQ˚»=ŸjGM)?æã«õàãC˘∏û ãÿ¨Ü{˛08++á±NîVúäAb:ı;ëtæ‘@¡ÆmßQd
+ax±Ni7Ùhx~Óë^hZÓnÅbœœUÔ¡Y|ÁgíΩ¬ù¿èyN"aﬂ^ûKZùÑ~©Âiƒ?Eÿ/∫≥ùˇ^±Ü⁄?'¸?[7±à¢ƒ∫‡ìd¡K5*õs5iêàﬂN.`°˝ OæûÅ©à—ÒÆé°Vn™#WswP ¸ÜÁYÉﬂ˝≤±ÎÁÚ∂Z»…`çù÷≥Ó≥@∆&,‘37?ıfÜ$$Qpy÷hsûVÅ{ËÉ∏¥"O7ˆdú:Pÿ˚·î\\†m/`·{¥G¡@„î¸ó"™±vˆ|Õ˝G°™49æ˝h.ÕÄ‚ö#∫
+7ƒq–’.N ŸΩˆé√í˙ù◊Aû’òùdj}DÅ∞”ªÛèƒÙ(‘PºÓlt¸™ÈèåôkåÊÖ6bôÚÊƒMõ’ZbΩ∑g^^•ü'Ä®¡& ÈMÔÅò7˙^¯õJúFj®•È+ÏÚ„ŸRﬂ<BZµCCÄY4≈`j∞)YtŸÎ…sT*€cîô@è<‹‡`¬\ÂG∂˝§«ßA]â"ÿ¸Ç¿ÖYàêc`Eì¬]œgéKeÕ∫ÚŸc¡Ü≤'¡…£ô≥È@ˇêŒ	,£≠µ|˜∆T-ªß4Êô⁄XYGò®k¥L˚
+Ô˛¢2¿6MïGRZ£Äa»Ê˜O∆å‡¿µ™m∫Çzô•ÍB¶î‚Z•ó∂'∫~.h∞€ä:HTº#˝8n£>¥Mæu C“eÀ¸L\T_ÄçÛt<kŸó0q† ∆˜¢J(ÍÕ( ¸≠M’“®<èÏ)≠Gé|õè7uk;∞ØB\H-	∑2zRS_=≥,˘!˝áå-«ç»°¿˛ô'Ñç÷“ÚÉª;L%¬>•Ò_+˘¿ã2œRg„,®°∑Ô<¢ï}≤ÉZpª®»ä¶õ·C¶6d≠µıÌ›–"aÙæo≠YËñ{yóná2¬%òG+Ó—¥Å˛ó_â%2ƒ¸Aπ'◊ÏÇëV1|˙ˆÓ6ƒ]∞O0I$ì¯làLßà)îmT ≠UO.>ÍÇ≠¬,É¿rΩØ^àpsl|u1Ò±”¢ÕòDWﬂ∑≥÷Íf„≈Qÿ	ÈØÈıÜ‹—∆ã
+ê≥{≈pj£jÊeº±Ÿxãÿcj‘Ìﬂ˜h–)‘≠§ZK≤H∆%∞Î€2—ò∂1ÿŸñ´ﬁå«ª”ò9ß≠ 73bQÚ+üí™s9£°ch°∫Ÿlñπ2“Q
+`ÑÚ÷fó™G∑jkvh^]F∏Û^´Ú‘˜¿<˘◊èNNÖ9¥*
+∆˛≤ $ﬂ≤´ë8Cyå∏-+5ö¯¬Â≥eÕZO≥ì0÷f_3Ë⁄Û,x$øŸÖÄ¸cN\p<Œ_π“_óK›˙ ãg«b“ò9Ó¶ñ	V]‹⁄}
+5{ÔÛÀz5NπtÍ‡‡8;ÿÑL·’s=`;[Uı`øp	>2nﬂ8äªı≠ÖÔ{"/ªó¿ºﬂ¬Õÿ•j€—∂†dÃ¬˝8ÔÌçUL;¸Èé*òçˇÑ⁄7b∞}T‚¡°Ó¥ÄÉu|Õ∫Uo%”#˙ÀóV=ûƒ'eL=îÄÔ∫,"2 ºD∂z.≠Á™sæñ∞U˝¿5 Ùœ¨ª¯ÃVú©º úÀC`÷Î\∆ΩJk°·u˛íª∂í˝dtµ ?5ÛŸé∫¨CB4`PjÅÓ;M‘∏äùèF|Ì≥"]\≤kq—fIá›Ú±Tàj_!Èó∞ÅÃK˝>BÄ›>•¥˘6◊ÃËK¬Í-ÔH⁄Ωç⁄∆√áÌ¬çüNn™∑E4ØÛ/Û—=Eëπ-äîrJd˚÷§ãRøù™NJ$»r>µâ@.êUÇÓtµÜw7˛µ:∑=ádƒeä∏Cv®≥°WÂ2 :¨„ä.‡‘÷I~ÑH/)å y±cÓg‹√‡ ‘æ»úD¥t4ç1∂X≤› ©>S˝ÉB`úÜñ¨Hã
+ø/ëÄpˆÀV•<˜∆(ÜM‹™»l$≤yÎ6E¨Ωó3˝o•€¡sxüã1q4;¶£qº;¸˜∑w™E|)+!~Î[à∑PπÁ£ä\ö±ììf„EÇ¨üôèªÏ9“D$pR≈wú5CéÊ&¯¡®ˇ«é%ﬂJ¬ﬁ3?°ÉÕ©˜ﬁ/≥ûH¬Œﬂ	Æı®¯%é©3Ø®4ı•‚S_íwØA«tjÎÎFåjŸëFEósNıÆW9Ë—Ç)”`	M¥"ëÌHŸ9`∑
+IUßJxÆwW»◊Æ -öü}s"LüÉ{_Z®®Ç]ÿÆöÇÙæ|zg|@
+∆1∫ˇ¨˙k(eèˆúd|
+9¶µ≤V´ a≥5ö¨ˇ˚Èu7≠.UŸú¬⁄D 2MfèD’ΩàcÄ¯<ä¿``oÊÏî—¿˜@õA|mñºÆõ©‡4[*‡ºxj[WÕfõ8&$mÈNOótπ6¬Ä)¨?≥<lôô|+‚P	í	ˇ≈áA•ÑÁ≥◊óªr‰KˇÇpB”eõR(©&˛™ù2
+Jq‘ Wõ√ETˆ8´oŒ6íôÚB9°ÚS∏0ù∫ JÅON‡˜bÏO6ÂC‘*-„R√Ô©›/†oìæÉÆò9:≠øéZV’!'@öN^À∑◊6ıâæ¥pG‡≈”˘∏E˛NR∏óˆûﬁ+Ã◊àI˘hâ≠d<	B‚Ø/µº˘≠Æ§Ó„h„æv‹˜&eR|e›Wá≤Ù:v)ﬁ6ﬂB-‡7sˇÈIµg∞^–
+6¢ÀWK2¿ÏOŸ¥$&0òÆè›Ì§‚b/c¡∏åà^4¡ l£ÌûW`çæ≥±/_g™` ¬ﬂrNG7úíËGπÄ^ïtUπ∏M@54üElGº'Oë˘\
+«e=„™Q
+pú vÑ…Ddo›î5K{^!ﬁﬂ•ü≠w£ÃdËH;;Óõ∞¡»≠·Ä¥ ZWìNå…Œ-£oŸˆAYxÃ-®”ªÀö£¡G$Ω⁄û›qé_˛›˚ùZn^‹˝à‡îÆ8˛ﬂ√µYxıÜZÏoˆ8‡]§‚£ 2sπÈ%9¥((F[Ænd:_Ù»¥∏uy„º®ÌèO≈D?$2ä∆<Y—•˘±˝ù<¯
+¡hN£¨ˆ˚yÂ3 Zü}Œ>‘o»)«Ò≠-[±∏k¶Œ=èÒ0∆ßÂC;ÌSœ{/ÒJæ¸=êXVsí¶dieÙ˜{rÉud=ûÔYªùfı3“r;Œ–⁄µ≥ÇDs?EM≈˛pP#¶u˝JÖ9„ê¢Nﬂ˝ÜQ|ıê"M~@‡ïP….”œ\#´4Ç&¡ï„ª¨,˝„¨à@dc˙ÚPè)∆j∆}&r˘IáIÙ0ÛX¢;◊Vì •n§Âﬂ4ç1∆¯¥Mo‹x‚U#ãª¸Äsyj(µéáqM{C¶˜R-ıwÛ()Ô˙{c{Ÿit'
+Ë]˚…VFg€`ø¬êG$©®«tLjvªÃdœ<∂/;FÊˆq∫Uüñ—≈óÒâÈòP[√N
+›ès˚æ
+pÃDe‘Ñ„O|{ñÕÔá5-é∆%BÕAì_≈p´¡ôxúaÄΩ◊aí÷Û4uÑ%fj∆cD89^≤rg»/Ú*íOI¶Ù’í‘”úuXÑ	ı‘?û,w|	å†snª‹˝=ƒ¸dXñR\4∞8ö.ú9@-¯;*¥Ìıá,aG‘ q#k9∂0û˜sﬂ	
+YÒ–Ê1i¿!76á¸àê›q"ññìQÎÅßö˙—JNÉËèE˝ÁçÌï≠/ÔQ"[‹U÷œ; iãf∑Ó+’√∫+Ad›Ó®‹9÷m˜E?∫a©≈5 ¥˙Ñyd9>2›qrnm$¶ª5Í_}nnoK≥†!k
+Q~nœÅs®{Úˆô∏{c˜* —∂8öCKN’ŒÇ/ò]¥ìÖ…c§kïo„Bˇìä›G52‡I]°◊·≠~™Ù–áπmÿ©3ôÛ·@0–'wà∞+Îû•Ê≤pµ0QöΩÎ>Ç∏@Îó·y≤ƒÿ√)ÈıiK7U∑ù><†ÅÿÇ˙ë›Ó’|.“ÛDpÇkI˛-≠®]m†‘˝
+*¶Œ¬Ób¢•Ü¶ú⁄Ëˆ‹ÕñÒYÖÒ¸◊åI>$Ò;R’(A/◊˜¸'4¯˜y&üÀ±»ÙﬂS@Q q]ﬁyÍ%¡›”‘û∫tbÓFw"|l∞üäD…vê$mg€ÛÊY_ßú†Ø|(A	ê3æõ{˛¢¿( ⁄ øÅC`å÷”NJ¡π•Ω*ü‹@•*zÀæñb|JT/`¡¯∫‡LÃÈ£ ç‘K\iE›[7‘Ò¨U.*‹!Åp3 iSèù∑-ÌV“ﬂÌïQã}åm„MÇoõ˘ñç†ﬁû-äÕdèÄù ñ.5‘ 4!Ä="∏_êïKd†§o3ï∏¡äêIÔ§øE˜Ç·Íˆœ(´!‹”1héø‹Ω˝Q÷Ωh{sÍï¯Áá!‘9d%v¡?[¿óGœ
+≤L*æ‡∑ìKñ÷úPQ$	L!fèÃT2)NÁ2jßß~óµ‚HßAﬂÕﬂàè6ò{¶8"üÉÕÇX[j†O»jd≠≈–Ypzt!˙?ﬁRxÛQ5Ïµh+8t1~r:|SHÊ¨óPÅÕˇU:∞;1üû∑„ë;åÒ)√°ıe‹Ö≈ˆûô%∑©´á>ké√}äı0o€\™Op%R{_Éf\Oó∏∞k\EMÏπ‰kå±{YtãÜáÜKÇ·4Ú&dtÇΩÇPìÓAb ™Æ•ñêŒ.ü9”ŸC?∆åcK(∆F◊∞Ò%]B+◊<VJBÙzû‰J$a¡NzJO=5X.¢CmüÏm€nKÒN«˘`ÔU~úå¢…Gi3|Á?_n-]ÕΩe0ˆ1ïî¯›√£é˝Ù?Ò:ß5>•(£;L$∑(–¯uÈ§< •¬ãñTË9Çü‚Ë"◊éÑ¿r»!êè_e îÊi[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ clearat maybehere00/-file3[14Pman filecat maybehere00/-file3[14Pman filefile */*
+[?2004lmaybehere00/-file1:       ASCII text, with very long lines (1038)
+maybehere00/-file2:       ASCII text, with very long lines (9387)
+maybehere00/-file3:       OpenPGP Secret Key
+maybehere00/spaces file1: ASCII text, with very long lines (6117)
+maybehere00/spaces file2: ASCII text, with very long lines (6849)
+maybehere00/spaces file3: data
+maybehere01/-file1:       ASCII text, with very long lines (6027)
+maybehere01/-file2:       ASCII text
+maybehere01/-file3:       data
+maybehere01/spaces file1: ASCII text, with very long lines (4138)
+maybehere01/spaces file2: ASCII text, with very long lines (4542)
+maybehere01/spaces file3: data
+maybehere02/-file1:       ASCII text, with very long lines (3800)
+maybehere02/-file2:       X1 archive data
+maybehere02/-file3:       data
+maybehere02/spaces file1: ASCII text, with very long lines (6745)
+maybehere02/spaces file2: ASCII text, with very long lines (8487)
+maybehere02/spaces file3: data
+maybehere03/-file1:       ASCII text, with very long lines (314)
+maybehere03/-file2:       ASCII text, with very long lines (6594)
+maybehere03/-file3:       data
+maybehere03/spaces file1: ASCII text, with very long lines (2189)
+maybehere03/spaces file2: ASCII text, with very long lines (3384)
+maybehere03/spaces file3: data
+maybehere04/-file1:       ASCII text, with very long lines (4409)
+maybehere04/-file2:       ASCII text, with very long lines (2618)
+maybehere04/-file3:       data
+maybehere04/spaces file1: ASCII text, with very long lines (5531)
+maybehere04/spaces file2: ASCII text, with very long lines (2490)
+maybehere04/spaces file3: data
+maybehere05/-file1:       ASCII text, with very long lines (2345)
+maybehere05/-file2:       ASCII text, with very long lines (5958)
+maybehere05/-file3:       OpenPGP Public Key
+maybehere05/spaces file1: ASCII text, with very long lines (879)
+maybehere05/spaces file2: ASCII text, with very long lines (2419)
+maybehere05/spaces file3: data
+maybehere06/-file1:       ASCII text, with very long lines (5730)
+maybehere06/-file2:       ASCII text, with very long lines (1075)
+maybehere06/-file3:       data
+maybehere06/spaces file1: ASCII text, with very long lines (4072)
+maybehere06/spaces file2: ASCII text, with very long lines (4250)
+maybehere06/spaces file3: data
+maybehere07/-file1:       ASCII text, with very long lines (3662)
+maybehere07/-file2:       ASCII text, with very long lines (2487)
+maybehere07/-file3:       data
+maybehere07/spaces file1: ASCII text, with very long lines (4129)
+maybehere07/spaces file2: ASCII text, with very long lines (9063)
+maybehere07/spaces file3: data
+maybehere08/-file1:       ASCII text, with very long lines (1076)
+maybehere08/-file2:       ASCII text, with very long lines (3824)
+maybehere08/-file3:       data
+maybehere08/spaces file1: ASCII text
+maybehere08/spaces file2: ASCII text, with very long lines (3692)
+maybehere08/spaces file3: data
+maybehere09/-file1:       ASCII text, with very long lines (3627)
+maybehere09/-file2:       ASCII text, with very long lines (773)
+maybehere09/-file3:       data
+maybehere09/spaces file1: ASCII text, with very long lines (5300)
+maybehere09/spaces file2: ASCII text, with very long lines (8715)
+maybehere09/spaces file3: data
+maybehere10/-file1:       ASCII text, with very long lines (1051)
+maybehere10/-file2:       ASCII text, with very long lines (1990)
+maybehere10/-file3:       data
+maybehere10/spaces file1: ASCII text, with very long lines (8268)
+maybehere10/spaces file2: ASCII text, with very long lines (3569)
+maybehere10/spaces file3: data
+maybehere11/-file1:       ASCII text, with very long lines (1210)
+maybehere11/-file2:       ASCII text, with very long lines (4558)
+maybehere11/-file3:       data
+maybehere11/spaces file1: ASCII text, with very long lines (3146)
+maybehere11/spaces file2: ASCII text, with very long lines (502)
+maybehere11/spaces file3: data
+maybehere12/-file1:       ASCII text, with very long lines (9677)
+maybehere12/-file2:       ASCII text
+maybehere12/-file3:       data
+maybehere12/spaces file1: ASCII text, with very long lines (2156)
+maybehere12/spaces file2: ASCII text, with very long lines (2459)
+maybehere12/spaces file3: data
+maybehere13/-file1:       ASCII text, with very long lines (1358)
+maybehere13/-file2:       ASCII text, with very long lines (1422)
+maybehere13/-file3:       data
+maybehere13/spaces file1: ASCII text, with very long lines (3951)
+maybehere13/spaces file2: ASCII text, with very long lines (951)
+maybehere13/spaces file3: data
+maybehere14/-file1:       ASCII text, with very long lines (4281)
+maybehere14/-file2:       ASCII text, with very long lines (8350)
+maybehere14/-file3:       OpenPGP Secret Key
+maybehere14/spaces file1: ASCII text, with very long lines (1381)
+maybehere14/spaces file2: ASCII text, with very long lines (870)
+maybehere14/spaces file3: data
+maybehere15/-file1:       ASCII text, with very long lines (8793)
+maybehere15/-file2:       ASCII text, with very long lines (9498)
+maybehere15/-file3:       data
+maybehere15/spaces file1: ASCII text, with very long lines (1622)
+maybehere15/spaces file2: ASCII text
+maybehere15/spaces file3: data
+maybehere16/-file1:       ASCII text, with very long lines (4276)
+maybehere16/-file2:       ASCII text, with very long lines (5300)
+maybehere16/-file3:       data
+maybehere16/spaces file1: ASCII text, with very long lines (9772)
+maybehere16/spaces file2: ASCII text, with very long lines (3145)
+maybehere16/spaces file3: data
+maybehere17/-file1:       ASCII text, with very long lines (1132)
+maybehere17/-file2:       ASCII text, with very long lines (1790)
+maybehere17/-file3:       data
+maybehere17/spaces file1: ASCII text, with very long lines (8360)
+maybehere17/spaces file2: ASCII text, with very long lines (3386)
+maybehere17/spaces file3: data
+maybehere18/-file1:       ASCII text, with very long lines (9696)
+maybehere18/-file2:       ASCII text
+maybehere18/-file3:       data
+maybehere18/spaces file1: ASCII text, with very long lines (7333)
+maybehere18/spaces file2: ASCII text, with very long lines (6347)
+maybehere18/spaces file3: data
+maybehere19/-file1:       ASCII text, with very long lines (6301)
+maybehere19/-file2:       ASCII text, with very long lines (5593)
+maybehere19/-file3:       data
+maybehere19/spaces file1: ASCII text, with very long lines (7185)
+maybehere19/spaces file2: ASCII text, with very long lines (8784)
+maybehere19/spaces file3: data
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ du */*
+[?2004l4	maybehere00/-file1
+12	maybehere00/-file2
+8	maybehere00/-file3
+8	maybehere00/spaces file1
+8	maybehere00/spaces file2
+4	maybehere00/spaces file3
+8	maybehere01/-file1
+4	maybehere01/-file2
+12	maybehere01/-file3
+8	maybehere01/spaces file1
+8	maybehere01/spaces file2
+12	maybehere01/spaces file3
+4	maybehere02/-file1
+4	maybehere02/-file2
+8	maybehere02/-file3
+8	maybehere02/spaces file1
+12	maybehere02/spaces file2
+4	maybehere02/spaces file3
+4	maybehere03/-file1
+8	maybehere03/-file2
+12	maybehere03/-file3
+4	maybehere03/spaces file1
+4	maybehere03/spaces file2
+12	maybehere03/spaces file3
+8	maybehere04/-file1
+4	maybehere04/-file2
+4	maybehere04/-file3
+8	maybehere04/spaces file1
+4	maybehere04/spaces file2
+8	maybehere04/spaces file3
+4	maybehere05/-file1
+8	maybehere05/-file2
+4	maybehere05/-file3
+4	maybehere05/spaces file1
+4	maybehere05/spaces file2
+12	maybehere05/spaces file3
+8	maybehere06/-file1
+4	maybehere06/-file2
+4	maybehere06/-file3
+4	maybehere06/spaces file1
+8	maybehere06/spaces file2
+8	maybehere06/spaces file3
+4	maybehere07/-file1
+4	maybehere07/-file2
+4	maybehere07/-file3
+8	maybehere07/spaces file1
+12	maybehere07/spaces file2
+4	maybehere07/spaces file3
+4	maybehere08/-file1
+4	maybehere08/-file2
+4	maybehere08/-file3
+4	maybehere08/spaces file1
+4	maybehere08/spaces file2
+12	maybehere08/spaces file3
+4	maybehere09/-file1
+4	maybehere09/-file2
+8	maybehere09/-file3
+8	maybehere09/spaces file1
+12	maybehere09/spaces file2
+8	maybehere09/spaces file3
+4	maybehere10/-file1
+4	maybehere10/-file2
+4	maybehere10/-file3
+12	maybehere10/spaces file1
+4	maybehere10/spaces file2
+4	maybehere10/spaces file3
+4	maybehere11/-file1
+8	maybehere11/-file2
+12	maybehere11/-file3
+4	maybehere11/spaces file1
+4	maybehere11/spaces file2
+12	maybehere11/spaces file3
+12	maybehere12/-file1
+4	maybehere12/-file2
+12	maybehere12/-file3
+4	maybehere12/spaces file1
+4	maybehere12/spaces file2
+4	maybehere12/spaces file3
+4	maybehere13/-file1
+4	maybehere13/-file2
+4	maybehere13/-file3
+4	maybehere13/spaces file1
+4	maybehere13/spaces file2
+8	maybehere13/spaces file3
+8	maybehere14/-file1
+12	maybehere14/-file2
+4	maybehere14/-file3
+4	maybehere14/spaces file1
+4	maybehere14/spaces file2
+4	maybehere14/spaces file3
+12	maybehere15/-file1
+12	maybehere15/-file2
+8	maybehere15/-file3
+4	maybehere15/spaces file1
+4	maybehere15/spaces file2
+4	maybehere15/spaces file3
+8	maybehere16/-file1
+8	maybehere16/-file2
+8	maybehere16/-file3
+12	maybehere16/spaces file1
+4	maybehere16/spaces file2
+8	maybehere16/spaces file3
+4	maybehere17/-file1
+4	maybehere17/-file2
+8	maybehere17/-file3
+12	maybehere17/spaces file1
+4	maybehere17/spaces file2
+8	maybehere17/spaces file3
+12	maybehere18/-file1
+4	maybehere18/-file2
+4	maybehere18/-file3
+8	maybehere18/spaces file1
+8	maybehere18/spaces file2
+8	maybehere18/spaces file3
+8	maybehere19/-file1
+8	maybehere19/-file2
+8	maybehere19/-file3
+8	maybehere19/spaces file1
+12	maybehere19/spaces file2
+4	maybehere19/spaces file3
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ man du
+[?2004l[?1049h[22;0;0t[?1h=[4mDU[24m(1)                                                                   User Commands                                                                   [4mDU[24m(1)[m
+[m
+[1mNAME[0m[m
+       du - estimate file space usage[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mdu [22m[[4mOPTION[24m]... [[4mFILE[24m]...[m
+       [1mdu [22m[[4mOPTION[24m]... [4m--files0-from=F[0m[m
+[m
+[1mDESCRIPTION[0m[m
+       Summarize device usage of the set of FILEs, recursively for directories.[m
+[m
+       Mandatory arguments to long options are mandatory for short options too.[m
+[m
+       [1m-0[22m, [1m--null[0m[m
+              end each output line with NUL, not newline[m
+[m
+       [1m-a[22m, [1m--all[0m[m
+              write counts for all files, not just directories[m
+[m
+       [1m--apparent-size[0m[m
+              print  apparent  sizes  rather  than  device  usage; although the apparent size is usually smaller, it may be larger due to holes in ('sparse')[m
+              files, internal fragmentation, indirect blocks, and the like[m
+[m
+       [1m-B[22m, [1m--block-size[22m=[4mSIZE[0m[m
+              scale sizes by SIZE before printing them; e.g., '-BM' prints sizes in units of 1,048,576 bytes; see SIZE format below[m
+[m
+       [1m-b[22m, [1m--bytes[0m[m
+              equivalent to '--apparent-size [1m--block-size[22m=[4m1[24m'[m
+[m
+       [1m-c[22m, [1m--total[0m[m
+              produce a grand total[m
+[m
+       [1m-D[22m, [1m--dereference-args[0m[m
+              dereference only symlinks that are listed on the command line[m
+[m
+       [1m-d[22m, [1m--max-depth[22m=[4mN[0m[m
+              print the total for a directory (or file, with [1m--all[22m) only if it is N or fewer levels below the command line argument;   [1m--max-depth[22m=[4m0[24m  is  the[m
+              same as [1m--summarize[0m[m
+[m
+       [1m--files0-from[22m=[4mF[0m[m
+[7m Manual page du(1) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l[23;0;0t[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ man dudu */* -b
+[?2004l1039	maybehere00/-file1
+9388	maybehere00/-file2
+7378	maybehere00/-file3
+6118	maybehere00/spaces file1
+6850	maybehere00/spaces file2
+1915	maybehere00/spaces file3
+6028	maybehere01/-file1
+288	maybehere01/-file2
+9641	maybehere01/-file3
+4139	maybehere01/spaces file1
+4543	maybehere01/spaces file2
+8834	maybehere01/spaces file3
+3801	maybehere02/-file1
+3511	maybehere02/-file2
+4932	maybehere02/-file3
+6746	maybehere02/spaces file1
+8488	maybehere02/spaces file2
+2275	maybehere02/spaces file3
+315	maybehere03/-file1
+6595	maybehere03/-file2
+8275	maybehere03/-file3
+2190	maybehere03/spaces file1
+3385	maybehere03/spaces file2
+9234	maybehere03/spaces file3
+4410	maybehere04/-file1
+2619	maybehere04/-file2
+2117	maybehere04/-file3
+5532	maybehere04/spaces file1
+2491	maybehere04/spaces file2
+6002	maybehere04/spaces file3
+2346	maybehere05/-file1
+5959	maybehere05/-file2
+2572	maybehere05/-file3
+880	maybehere05/spaces file1
+2420	maybehere05/spaces file2
+8585	maybehere05/spaces file3
+5731	maybehere06/-file1
+1076	maybehere06/-file2
+3443	maybehere06/-file3
+4073	maybehere06/spaces file1
+4251	maybehere06/spaces file2
+8065	maybehere06/spaces file3
+3663	maybehere07/-file1
+2488	maybehere07/-file2
+3362	maybehere07/-file3
+4130	maybehere07/spaces file1
+9064	maybehere07/spaces file2
+1022	maybehere07/spaces file3
+1077	maybehere08/-file1
+3825	maybehere08/-file2
+2650	maybehere08/-file3
+215	maybehere08/spaces file1
+3693	maybehere08/spaces file2
+9138	maybehere08/spaces file3
+3628	maybehere09/-file1
+774	maybehere09/-file2
+7961	maybehere09/-file3
+5301	maybehere09/spaces file1
+8716	maybehere09/spaces file2
+7569	maybehere09/spaces file3
+1052	maybehere10/-file1
+1991	maybehere10/-file2
+1237	maybehere10/-file3
+8269	maybehere10/spaces file1
+3570	maybehere10/spaces file2
+2155	maybehere10/spaces file3
+1211	maybehere11/-file1
+4559	maybehere11/-file2
+8854	maybehere11/-file3
+3147	maybehere11/spaces file1
+503	maybehere11/spaces file2
+8845	maybehere11/spaces file3
+9678	maybehere12/-file1
+251	maybehere12/-file2
+9076	maybehere12/-file3
+2157	maybehere12/spaces file1
+2460	maybehere12/spaces file2
+1639	maybehere12/spaces file3
+1359	maybehere13/-file1
+1423	maybehere13/-file2
+3014	maybehere13/-file3
+3952	maybehere13/spaces file1
+952	maybehere13/spaces file2
+4389	maybehere13/spaces file3
+4282	maybehere14/-file1
+8351	maybehere14/-file2
+3756	maybehere14/-file3
+1382	maybehere14/spaces file1
+871	maybehere14/spaces file2
+376	maybehere14/spaces file3
+8794	maybehere15/-file1
+9499	maybehere15/-file2
+6299	maybehere15/-file3
+1623	maybehere15/spaces file1
+51	maybehere15/spaces file2
+1637	maybehere15/spaces file3
+4277	maybehere16/-file1
+5301	maybehere16/-file2
+8085	maybehere16/-file3
+9773	maybehere16/spaces file1
+3146	maybehere16/spaces file2
+7509	maybehere16/spaces file3
+1133	maybehere17/-file1
+1791	maybehere17/-file2
+4422	maybehere17/-file3
+8361	maybehere17/spaces file1
+3387	maybehere17/spaces file2
+6381	maybehere17/spaces file3
+9697	maybehere18/-file1
+77	maybehere18/-file2
+2306	maybehere18/-file3
+7334	maybehere18/spaces file1
+6348	maybehere18/spaces file2
+7040	maybehere18/spaces file3
+6302	maybehere19/-file1
+5594	maybehere19/-file2
+7965	maybehere19/-file3
+7186	maybehere19/spaces file1
+8785	maybehere19/spaces file2
+2307	maybehere19/spaces file3
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l[0m[01;34mmaybehere00[0m  [01;34mmaybehere02[0m  [01;34mmaybehere04[0m  [01;34mmaybehere06[0m  [01;34mmaybehere08[0m  [01;34mmaybehere10[0m  [01;34mmaybehere12[0m  [01;34mmaybehere14[0m  [01;34mmaybehere16[0m  [01;34mmaybehere18[0m
+[01;34mmaybehere01[0m  [01;34mmaybehere03[0m  [01;34mmaybehere05[0m  [01;34mmaybehere07[0m  [01;34mmaybehere09[0m  [01;34mmaybehere11[0m  [01;34mmaybehere13[0m  [01;34mmaybehere15[0m  [01;34mmaybehere17[0m  [01;34mmaybehere19[0m
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ ls maybehere00
+[?2004l[0m[01;32m-file1[0m  -file2  [01;32m-file3[0m  [01;32mspaces file1[0m  spaces file2  [01;32mspaces file3[0m
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ ls[K[Kman find
+[?2004l[?1049h[22;0;0t[?1h=[4mFIND[24m(1)                                                            General Commands Manual                                                            [4mFIND[24m(1)[m
+[m
+[1mNAME[0m[m
+       find - search for files in a directory hierarchy[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mfind [22m[-H] [-L] [-P] [-D debugopts] [-Olevel] [starting-point...] [expression][m
+[m
+[1mDESCRIPTION[0m[m
+       This  manual page documents the GNU version of [1mfind[22m.  GNU [1mfind [22msearches the directory tree rooted at each given starting-point by evaluating the given[m
+       expression from left to right, according to the rules of precedence (see section OPERATORS), until the outcome is known (the left hand side  is  false[m
+       for [4mand[24m operations, true for [4mor[24m), at which point [1mfind [22mmoves on to the next file name.  If no starting-point is specified, `.' is assumed.[m
+[m
+       If  you are using [1mfind [22min an environment where security is important (for example if you are using it to search directories that are writable by other[m
+       users), you should read the `Security Considerations' chapter of the findutils documentation, which is called [1mFinding Files [22mand comes with  findutils.[m
+       That document also includes a lot more detail and discussion than this manual page, so you may find it a more useful source of information.[m
+[m
+[1mOPTIONS[0m[m
+       The  [1m-H[22m, [1m-L [22mand [1m-P [22moptions control the treatment of symbolic links.  Command-line arguments following these are taken to be names of files or directo‚Äê[m
+       ries to be examined, up to the first argument that begins with `-', or the argument `(' or `!'.  That argument and any following arguments  are  taken[m
+       to be the expression describing what is to be searched for.  If no paths are given, the current directory is used.  If no expression is given, the ex‚Äê[m
+       pression [1m-print [22mis used (but you should probably consider using [1m-print0 [22minstead, anyway).[m
+[m
+       This  manual  page  talks about `options' within the expression list.  These options control the behaviour of [1mfind [22mbut are specified immediately after[m
+       the last path name.  The five `real' options [1m-H[22m, [1m-L[22m, [1m-P[22m, [1m-D [22mand [1m-O [22mmust appear before the first path name, if at all.  A double dash [1m-- [22mcould theoret‚Äê[m
+       ically be used to signal that any remaining arguments are not options, but this does not really work due to the way [1mfind [22mdetermines  the  end  of  the[m
+       following  path  arguments:  it does that by reading until an expression argument comes (which also starts with a `-').  Now, if a path argument would[m
+       start with a `-', then [1mfind [22mwould treat it as expression argument instead.  Thus, to ensure that all start points are taken as such, and especially to[m
+       prevent that wildcard patterns expanded by the calling shell are not mistakenly treated as expression arguments, it is generally safer to prefix wild‚Äê[m
+       cards or dubious path names with either `./' or to use absolute path names starting with '/'.  Alternatively, it is generally safe though non-portable[m
+       to use the GNU option [1m-files0-from [22mto pass arbitrary starting points to [1mfind[22m.[m
+[m
+       -P     Never follow symbolic links.  This is the default behaviour.  When [1mfind [22mexamines or prints information about files, and the file is a  symbolic[m
+              link, the information used shall be taken from the properties of the symbolic link itself.[m
+[m
+       -L     Follow  symbolic  links.   When [1mfind [22mexamines or prints information about files, the information used shall be taken from the properties of the[m
+              file to which the link points, not from the link itself (unless it is a broken symbolic link or [1mfind [22mis unable to examine the file to which the[m
+              link points).  Use of this option implies [1m-noleaf[22m.  If you later use the [1m-P [22moption, [1m-noleaf [22mwill still be in effect.  If [1m-L [22mis  in  effect  and[m
+              [1mfind [22mdiscovers a symbolic link to a subdirectory during its search, the subdirectory pointed to by the symbolic link will be searched.[m
+[m
+              When  the [1m-L [22moption is in effect, the [1m-type [22mpredicate will always match against the type of the file that a symbolic link points to rather than[m
+[7m Manual page find(1) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l[23;0;0t[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ find */8[K* -b [K[Ksize 1033b[Kc
+[?2004l[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ find * -sze 103[K[K[K[K[K[Kize 1033c
+[?2004lmaybehere07/.file2
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ cat maybehere07/.file2
+[?2004lHWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        [?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:36:16 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:38:53 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ^C[?2004l[?2004h[?2004l
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:39:07 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:39:19 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:39:30 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:39:47 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Wed Aug 28 09:40:29 EDT 2024
+===================================
+Wed Aug 28 09:40:35 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ c din[K[K[K[Kd inhere/in[K[K
+[?2004l[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l[0m[01;34mmaybehere00[0m  [01;34mmaybehere02[0m  [01;34mmaybehere04[0m  [01;34mmaybehere06[0m  [01;34mmaybehere08[0m  [01;34mmaybehere10[0m  [01;34mmaybehere12[0m  [01;34mmaybehere14[0m  [01;34mmaybehere16[0m  [01;34mmaybehere18[0m
+[01;34mmaybehere01[0m  [01;34mmaybehere03[0m  [01;34mmaybehere05[0m  [01;34mmaybehere07[0m  [01;34mmaybehere09[0m  [01;34mmaybehere11[0m  [01;34mmaybehere13[0m  [01;34mmaybehere15[0m  [01;34mmaybehere17[0m  [01;34mmaybehere19[0m
+[?2004h]0;bandit5@bandit: ~/inhere[01;32mbandit5@bandit[00m:[01;34m~/inhere[00m$ cd ..
+[?2004l[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ file *[Kinhere/* -size 1033b[Kc
+[?2004lUsage: file [-bcCdEhikLlNnprsSvzZ0] [--apple] [--extension] [--mime-encoding]
+            [--mime-type] [-e <testname>] [-F <separator>]  [-f <namefile>]
+            [-m <magicfiles>] [-P <parameter=value>] [--exclude-quiet]
+            <file> ...
+       file -C [-m <magicfiles>]
+       file [--help]
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ find inhere [K/* -size 1033c
+[?2004linhere/maybehere07/.file2
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ cat inhere/maybehere07/.file2
+[?2004lHWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        [?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ eixt[K[K[Kxit
+[?2004llogout
+===================================
+Wed Aug 28 09:41:59 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ ls
+[?2004l[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ ls -a
+[?2004l[0m[01;34m.[0m  [01;34m..[0m  .bash_logout  .bashrc  .profile
+[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ cd ~
+[?2004l[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ ls
+[?2004l[?2004h]0;bandit6@bandit: ~[01;32mbandit6@bandit[00m:[01;34m~[00m$ cd ..
+[?2004l[?2004h]0;bandit6@bandit: /home[01;32mbandit6@bandit[00m:[01;34m/home[00m$ ls
+[?2004l[0m[01;34mbandit0[0m   [01;34mbandit13[0m  [01;34mbandit18[0m  [01;34mbandit22[0m  [01;34mbandit27[0m      [01;34mbandit29-git[0m  [01;34mbandit31-git[0m  [01;34mbandit6[0m   [01;34mdrifter1[0m   [01;34mdrifter15[0m  [01;34mdrifter6[0m     [01;34mformulaone1[0m  [01;34mkrypton1[0m  [01;34mkrypton6[0m
+[01;34mbandit1[0m   [01;34mbandit14[0m  [01;34mbandit19[0m  [01;34mbandit23[0m  [01;34mbandit27-git[0m  [01;34mbandit3[0m       [01;34mbandit32[0m      [01;34mbandit7[0m   [01;34mdrifter10[0m  [01;34mdrifter2[0m   [01;34mdrifter7[0m     [01;34mformulaone2[0m  [01;34mkrypton2[0m  [01;34mkrypton7[0m
+[01;34mbandit10[0m  [01;34mbandit15[0m  [01;34mbandit2[0m   [01;34mbandit24[0m  [01;34mbandit28[0m      [01;34mbandit30[0m      [01;34mbandit33[0m      [01;34mbandit8[0m   [01;34mdrifter12[0m  [01;34mdrifter3[0m   [01;34mdrifter8[0m     [01;34mformulaone3[0m  [01;34mkrypton3[0m  [01;34mubuntu[0m
+[01;34mbandit11[0m  [01;34mbandit16[0m  [01;34mbandit20[0m  [01;34mbandit25[0m  [01;34mbandit28-git[0m  [01;34mbandit30-git[0m  [01;34mbandit4[0m       [01;34mbandit9[0m   [01;34mdrifter13[0m  [01;34mdrifter4[0m   [01;34mdrifter9[0m     [01;34mformulaone5[0m  [01;34mkrypton4[0m
+[01;34mbandit12[0m  [01;34mbandit17[0m  [01;34mbandit21[0m  [01;34mbandit26[0m  [01;34mbandit29[0m      [01;34mbandit31[0m      [01;34mbandit5[0m       [01;34mdrifter0[0m  [01;34mdrifter14[0m  [01;34mdrifter5[0m   [01;34mformulaone0[0m  [01;34mformulaone6[0m  [01;34mkrypton5[0m
+[?2004h]0;bandit6@bandit: /home[01;32mbandit6@bandit[00m:[01;34m/home[00m$ cd bandit [K7
+[?2004l[?2004h]0;bandit6@bandit: /home/bandit7[01;32mbandit6@bandit[00m:[01;34m/home/bandit7[00m$ ls
+[?2004ldata.txt
+[?2004h]0;bandit6@bandit: /home/bandit7[01;32mbandit6@bandit[00m:[01;34m/home/bandit7[00m$ cat data.txt
+[?2004lcat: data.txt: Permission denied
+[?2004h]0;bandit6@bandit: /home/bandit7[01;32mbandit6@bandit[00m:[01;34m/home/bandit7[00m$ chmod u+r data.txt [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kclear
+[?2004l[H[2J[3J[?2004h]0;bandit6@bandit: /home/bandit7[01;32mbandit6@bandit[00m:[01;34m/home/bandit7[00m$ ls
+[?2004ldata.txt
+[?2004h]0;bandit6@bandit: /home/bandit7[01;32mbandit6@bandit[00m:[01;34m/home/bandit7[00m$ ls -[K[K[K[Kcd ..
+[?2004l[?2004h]0;bandit6@bandit: /home[01;32mbandit6@bandit[00m:[01;34m/home[00m$ ..[K[Kexit
+[?2004llogout
