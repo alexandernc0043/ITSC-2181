@@ -13,4 +13,5 @@ int main(void){
     sum += input;
   }
   printf("Done!\n");
+  return 0;
 }
