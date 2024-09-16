@@ -6,8 +6,6 @@
 #define nameMax 20
 #define phoneMax 16
 
-
-
 //Customer Struct
 struct customer {
 	char firstName[nameMax];
@@ -28,16 +26,23 @@ void show_customer(struct customer cust){
 }
 // Function to display all customers
 void show_database(struct customer cust_db[], int size){
-	for(int i = 0; i <= size - 1; i++){
-		printf("show customer\n");
+	for(int i = 0; i < size; i++){
 		show_customer(cust_db[i]);
 	}
 }
 
 
+void findTotalBalance(struct customer cust_db[]){
+	float total = 0;
+	for(int i = 0; i < 20; i++){
+		total += cust_db[i].balance;
+	}
+	printf("The total amount owed to the company is %.2f\n", total);
+}
+
 
 // function to get customer information
-void getCustInfo(int i){
+int getCustInfo(int i){
 	char input[20];
 	printf("Enter first name: ");
 	scanf("%s", input);
@@ -46,7 +51,12 @@ void getCustInfo(int i){
 		exit(0);	
 	} else if(strcmp(input,":s") == 0 || strcmp(input,":S") == 0){
 		show_database(customers, i);
-	} else {
+		return i;
+	} else if(strcmp(input,":d") == 0 || strcmp(input,":D") == 0){
+		findTotalBalance(customers);
+		return i;
+	}
+	 else {
 		strcpy(customers[i].firstName, input);
 		printf("Enter middle name: ");
 		scanf("%s", customers[i].middleName);
@@ -56,15 +66,14 @@ void getCustInfo(int i){
 		scanf("%s", customers[i].phoneNumber);
 		printf("Enter balance: ");
 		scanf("%f", &customers[i].balance);
-		
+		return i + 1;
 	}
 }
 
 int main(void) {
 	int i = 0;
 	while(i < 20){
-		getCustInfo(i);
-		i++;
+		 i = getCustInfo(i);
 	}
 	return 0;
 }
