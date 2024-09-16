@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*
-Customer Struct
-*/
+
+// Limits for customer struct
+#define nameMax 20
+#define phoneMax 16
+
+
+
+//Customer Struct
 struct customer {
-	char firstName[20];
-	char middleName[20];
-	char lastName[20];
-	char phoneNumber[20];
+	char firstName[nameMax];
+	char middleName[nameMax];
+	char lastName[nameMax];
+	char phoneNumber[phoneMax];
 	float balance;
 };
 
@@ -23,11 +28,15 @@ void show_customer(struct customer cust){
 }
 // Function to display all customers
 void show_database(struct customer cust_db[], int size){
-	for(int i = 0; i < size; i++){
+	for(int i = 0; i <= size - 1; i++){
+		printf("show customer\n");
 		show_customer(cust_db[i]);
 	}
 }
 
+
+
+// function to get customer information
 void getCustInfo(int i){
 	char input[20];
 	printf("Enter first name: ");
@@ -47,12 +56,15 @@ void getCustInfo(int i){
 		scanf("%s", customers[i].phoneNumber);
 		printf("Enter balance: ");
 		scanf("%f", &customers[i].balance);
+		
 	}
 }
 
 int main(void) {
-	for(int i = 0; i < 20; i++){
+	int i = 0;
+	while(i < 20){
 		getCustInfo(i);
+		i++;
 	}
 	return 0;
 }
