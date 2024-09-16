@@ -43,6 +43,7 @@ void findTotalBalance(struct customer cust_db[]){
 
 // function to get customer information
 int getCustInfo(int i){
+	printf("Please enter the next customer's information\n:x - Closes the program\n:s - Displays customer information\n:d - shows total debt to the company\n");
 	char input[20];
 	printf("Enter first name: ");
 	scanf("%s", input);
