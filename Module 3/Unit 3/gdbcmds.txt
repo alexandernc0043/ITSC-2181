@@ -1,0 +1,3 @@
+cont - keeps exec until it hits break point
+step - execs next line of code and if function goes to function
+print - prints the value of a variable
