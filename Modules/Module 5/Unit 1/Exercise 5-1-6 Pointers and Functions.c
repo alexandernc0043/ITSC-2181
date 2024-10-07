@@ -19,6 +19,5 @@ int main(void){
 	int largest;
 	foo(n,a,&sum,&largest);
 	printf("%d : %d\n",sum,largest);
-
 	return 0;
 }
