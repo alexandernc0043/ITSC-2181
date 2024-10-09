@@ -18,6 +18,8 @@ int main(void)
 	}
 
 	printf("Memory Address: %p\n",ptr);
-
+	free(ptr); // free memory
+	ptr = NULL;
+	printf("Memory Address: %p\n",ptr);
 	return 0;
 }
