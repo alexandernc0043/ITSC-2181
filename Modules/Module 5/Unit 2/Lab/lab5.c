@@ -4,19 +4,23 @@
 int total_items = 0;
 float total_cost = 0.00;
 
+char item_name[50];
+int item_quantity;
+float item_cost;
+
 void pretty_print(char item[], int total, float cost){
-	printf("Item: %s\tQuantity: %d\tItem Cost: $%.2f\tSubtotal: $%.2f\n",item,total,cost,total_cost);
+	printf("Item: %s\tQuantity: %d\tItem Cost: $%.2f\tSubtotal: $%.2f\n",
+		item,
+		total,
+		cost,
+		(total*cost)
+	);
 }
 
 float process_data(char string[]){
-	char item[50];
-	int total;
-	float cost;
-	sscanf(string, "%s %d %f", item, &total, &cost);
+	sscanf(string, "%s %d %f", item_name, &item_quantity, &item_cost);
 	total_items++;
-	total_cost += cost;
-	pretty_print(item,total,cost);
-	return 0.0;
+	return (float) item_quantity * item_cost;
 }
 
 int main(int argc, char *argv[])
@@ -37,7 +41,9 @@ int main(int argc, char *argv[])
 
 	char line[100];
 	while(fgets(line, 100, file)){
-		process_data(line);
+		total_cost += process_data(line);
+		pretty_print(item_name,item_quantity,item_cost);
+	
 	}
 	printf("-----------------------------------------------------\n");
 	printf("Total Items: %d\t\t\tTotal Cost: %.2f\n",total_items,total_cost);
