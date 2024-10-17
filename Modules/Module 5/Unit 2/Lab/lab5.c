@@ -25,12 +25,6 @@ float process_data(char string[]){
 
 int main(int argc, char *argv[])
 {
-	
-	// if no file was provided
-	if(argc < 2){
-		printf("No file provided!\n");
-		exit(1);
-	}
 	// open file passed by cmd line argument
 	FILE* file;
 	file = fopen(argv[1],"r");
