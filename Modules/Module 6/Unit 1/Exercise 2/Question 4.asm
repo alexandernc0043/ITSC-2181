@@ -6,15 +6,19 @@
 # g = t1
 # j = t2
 
-# f = g - 3 – j * 15;
-# j * 15
-# g - 3
+# f = g - 3 – j * 15
+
+# f = (g - 3) – (j * 15)
+
+# t4 = j * 15
+# t3 = g - 3
+
+# t0 = t3 - t4
 
 
-sub t0, t1, 3 # set f to g - 3
+slli t4, t2, 3 		# t4 = j * 14
+add t4, t4, t2		# t4 += j
 
-add t3, t2, x0 # set t3 to j
-slli t2, t2, 4 # multiply j by 16
-sub t2, t2, t3 # subtract j by j
+sub t3, t1, 3 		# t3 = g - 3
 
-sub t0, t0, t2 # sub f by j
+sub t0, t3, t4 		# t0 = t3 - t4

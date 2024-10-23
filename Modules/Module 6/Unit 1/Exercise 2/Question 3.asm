@@ -4,25 +4,20 @@
 
  
 
-# f = g * 5 – j * 32;
-# f = (g * 5) – (j * 32);
-# g = g * 5
-# f = g
-# j = j * 32
-# f - j
+# f = g * 5 – j * 32
+# f = (g * 5) – (j * 32)
 
-# f = t0
-# g = t1
-# j = t2
+# t3 = (g * 4) + t1 (g)
+# t4 = (j * 32) + t2 (j)
 
-add t3, t1, x0 # t3 = g
+# t0 = f
+# t1 = g
+# t2 = j
 
-slli t1, t1, 2 # g * 4
+slli t3, t1, 2		# t3 = g * 4 
+add t3, t3, t1		# t3 += g
 
-add t1, t3, x0 # g + g
+slli t4, t2, 5		# t4 = j * 32
+add t4, t4, t2		# t4 += j 
 
-add t0, t1, x0 # f = g
-
-slli t2, t2, 5 # j * 32
-
-sub t0, t0, t2 # f - j
+sub t0, t3, t4		# t0 = t3 - t4

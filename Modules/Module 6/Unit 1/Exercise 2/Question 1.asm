@@ -7,6 +7,5 @@
 
 # operation 	destination, source 1, source 2
 
-add t0, x0, x0 			# t0 = x0 (0) + x0 (0)
-add t0, t0, 1			# t0 = t0 (0) + 1
+add t0, x0, 1			# t0 = x0 (0) + 1
 slli t0, t0, 2 			# t0 = 1 , shift left 2,
