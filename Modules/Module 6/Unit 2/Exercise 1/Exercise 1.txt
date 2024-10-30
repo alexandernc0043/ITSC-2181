@@ -1,0 +1,15 @@
+count the number of load and store instructions (ld/sd, lw/sw, lhw/shw, lbu/sbu) used.
+
+ld - 4
+sd - 4
+
+lw - 4
+sw - 2
+
+lhw - 0
+shw - 0
+
+lbu - 2
+sbu - 0
+
+total: 16
