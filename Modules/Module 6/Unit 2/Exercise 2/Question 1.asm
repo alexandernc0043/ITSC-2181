@@ -1,7 +1,7 @@
 # a = b * 3 + i * 4;
 
-ld x2, 0(x12)			# Load b
-ld x5, 0(x15)			# load i
+lw x2, 0(x12)			# Load b, word size
+lw x5, 0(x15)			# load im word size
 slli x22, x2, 2 		# x22 = b * 4
 sub x22, x22, x2 		# x22 = b - b (b*3)
 slli x25, x5, 2 		# x25 = i * 4
