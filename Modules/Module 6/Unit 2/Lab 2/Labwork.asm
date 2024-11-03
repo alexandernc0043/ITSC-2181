@@ -17,5 +17,6 @@ main:
 	la t6, sum	# Load sum into t6
 	sw t5, 0(t6)	# Store Sum into t6
 	
-	li a7, 10	# Exit Program
-	ecall
+	li a0, 0 	# Exit Code
+	li a7, 93	# Exit 
+	ecall		# Call exit
