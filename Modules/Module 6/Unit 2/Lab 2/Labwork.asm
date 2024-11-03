@@ -2,6 +2,7 @@
 	A: .word 10,11,12,13
 	sum: .word 0
 .text
+.globl main
 main:
 	la t0, A
 	
