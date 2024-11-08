@@ -1,0 +1,9 @@
+Instructions starting with b or j
+5
+
+Instructions not learned:
+mv
+call
+sraiw
+sext.w
+mul
