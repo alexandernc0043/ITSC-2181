@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/alexanderp/JetBrains/CLionProjects/ITSC-2181/Modules/Module 6/Unit 3/Lab",
+      "program": "/Users/alexanderp/JetBrains/CLionProjects/ITSC-2181/Modules/Module 6/Unit 3/Lab/build/Debug/outDebug"
+    }
+  ]
+}
