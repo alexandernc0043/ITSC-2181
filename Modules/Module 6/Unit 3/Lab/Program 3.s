@@ -1,13 +1,11 @@
 	.data
-arr:
-	.space  400
-sum:
-	.word   0
-newLine:
-	.string "\n"
+arr: .space  400
+sum: .word   0
+newLine: .string "\n"
+line: .string "Average: "
 
-	.text
-	.globl  main
+.text
+.globl  main
 main:
 	la      t0, arr           # Load address of arr
 	li      t1, 0             # i
@@ -40,6 +38,16 @@ random:
 	ecall
 	jr      ra
 success:
+	la      a0, line
+	li      a7, 4
+	ecall
+	addi    s2, x0 100
+	div     a0, s0, s2        # number to print
+	li      a7, 1             # Print number
+	ecall
+	la      a0, newLine       # print newline
+	li      a7, 4             # print string
+	ecall
 	li      a0, 0
 	li      a7, 93
 	ecall
